@@ -12,3 +12,4 @@ script:
   - mix test
 after_script:
   - mix credo
+  - mix dialyzer --halt-exit-status
