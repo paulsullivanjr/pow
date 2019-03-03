@@ -3,7 +3,7 @@ env:
   - MIX_ENV=test
 matrix:
   include:
-    - elixir: 1.6
+    - elixir: 1.7
       otp_release: 20.0
     - elixir: 1.8
       otp_release: 21.0

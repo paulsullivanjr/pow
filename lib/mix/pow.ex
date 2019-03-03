@@ -21,7 +21,8 @@ defmodule Mix.Pow do
   """
   @spec ensure_dep!(binary(), atom(), OptionParser.argv()) :: :ok | no_return
   def ensure_dep!(task, dep, _args) do
-    fetch_deps()
+    []
+    |> Dep.load_on_environment()
     |> dep_in_deps?(dep)
     |> case do
       true ->
@@ -29,16 +30,6 @@ defmodule Mix.Pow do
 
       false ->
         Mix.raise("mix #{task} can only be run inside an application directory that has #{inspect dep} as dependency")
-    end
-  end
-
-  # TODO: Remove by 1.1.0 and only support Elixir 1.7
-  defp fetch_deps do
-    System.version()
-    |> Version.match?("~> 1.6.0")
-    |> case do
-      true  -> apply(Dep, :loaded, [[]])
-      false -> apply(Dep, :load_on_environment, [[]])
     end
   end
 

@@ -19,13 +19,13 @@ defmodule Pow.Extension.Phoenix.ControllerCallbacks.Base do
   @callback before_respond(atom(), atom(), any(), Config.t()) :: any()
 
   @doc false
-  defmacro __using__(config) do
+  defmacro __using__(_config) do
     quote do
       @behaviour unquote(__MODULE__)
 
-      import Base, only: [__define_helper_methods__: 1]
+      import Base, only: [__define_helper_methods__: 0]
 
-      __define_helper_methods__(unquote(config))
+      __define_helper_methods__()
 
       @before_compile unquote(__MODULE__)
     end
